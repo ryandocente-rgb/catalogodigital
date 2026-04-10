@@ -4,42 +4,33 @@ plugins {
 
 android {
     namespace = "com.example.catalogodigital"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 34 // Mude aqui (remova aquele bloco release { ... })
 
     defaultConfig {
         applicationId = "com.example.catalogodigital"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34 // Mude aqui para 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // ... resto igual
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
+    // Mude a compatibilidade para Java 17 (é o padrão mais seguro hoje)
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
+    // Note que cada hífen do arquivo TOML virou um ponto aqui
+    implementation(libs.androidx.core.ktx)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
